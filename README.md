@@ -19,20 +19,6 @@
     <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
   <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
 </p>
-
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
 ---
 
 # Description
@@ -57,7 +43,7 @@ OOP(객체 지향 프로그래밍) 원칙을 준수하여 코드의 재사용성
 
 ### 3. 상속 (Inheritance)
 
-상속은 기존 클래스의 속성과 메서드를 새로운 클래스가 물려받��� 원칙입니다. 이를 통해 코드의 재사용성을 높일 수 있습니다.
+상속은 기존 클래스의 속성과 메서드를 새로운 클래스가 물려받는 원칙입니다. 이를 통해 코드의 재사용성을 높일 수 있습니다.
 
 - **적용 예시**: 
   - `InMemoryUserRepository`를 상속받는 `AdvancedUserRepository` 클래스는 기본적인 사용자 데이터 저장 기능을 그대로 사용하면서, 추가적인 기능(예: 사용자 이름으로 검색)을 제공합니다.
@@ -101,7 +87,7 @@ SOLID 원칙을 준수하여 유지보수성과 확장성을 확보
 
 클라이언트는 자신이 사용하지 않는 메서드에 의존하지 않아야 합니다. 즉, 인터페이스는 특정 클라이언트에 맞게 작게 나누어져야 합니다.
 
-- **적�� 예시**: 
+- **적용 예시**: 
   - `UserRepository` 인터페이스는 사용자 데이터 접근에 필요한 메서드만을 정의하여, 클라이언트가 필요하지 않은 메서드에 의존하지 않도록 합니다.
 
 ### 5. 의존 역전 원칙 (Dependency Inversion Principle - DIP)
@@ -111,10 +97,11 @@ SOLID 원칙을 준수하여 유지보수성과 확장성을 확보
 - **적용 예시**: 
   - `UsersService`는 `UserRepository` 인터페이스에 의존하여, 구체적인 구현체에 의존하지 않습니다. 이는 테스트와 유지보수를 용이하게 합니다.
 
-<<<<<<< HEAD
-# Order vs Order2: 설계 비교
+---
 
-이 문서는 `order`와 `order2` 디렉토리의 설계 차이점을 설명합니다. 두 디렉토리는 각각 독립적인 비즈니스 규칙을 적용한 설계와 그렇지 않은 설계를 보여줍니다.
+# Order vs Order2 vs Order3: 설계 비교
+
+이 문서는 `order`, `order2`, `order3` 디렉토리의 설계 차이점을 설명합니다. 각 디렉토리는 각각 독립적인 비즈니스 규칙을 적용한 설계와 그렇지 않은 설계를 보여줍니다.
 
 ## Order (독립적인 설계)
 
@@ -142,29 +129,23 @@ SOLID 원칙을 준수하여 유지보수성과 확장성을 확보
 - 비즈니스 로직을 다른 컨텍스트에서 재사용하기 어렵습니다.
 - 데이터 저장소의 변경이 필요할 때, 비즈니스 로직도 함께 수정해야 합니다.
 
+## Order3 (SRP 및 OCP 적용 설계)
+
+### 특징
+- **SRP 적용**: `Order3Service`는 비즈니스 로직만을 담당하고, `Order3Repository`는 데이터 접근 로직만을 담당합니다.
+- **OCP 적용**: `Order3RepositoryInterface`를 통해 데이터 접근 로직을 추상화하여, 새로운 저장소 구현체를 추가할 때 기존 코드를 수정하지 않고도 확장할 수 있습니다.
+- **유지보수성**: 각 클래스가 하나의 책임만을 가지므로, 코드의 가독성과 유지보수성이 높습니다.
+- **확장성**: 인터페이스를 통해 확장 가능성을 높였습니다.
+
+### 장점
+- 코드의 유지보수성과 확장성이 매우 높습니다.
+- 비즈니스 로직과 데이터 접근 로직이 명확히 분리되어 있어, 각 부분을 독립적으로 테스트하고 확장할 수 있습니다.
+- 새로운 저장소 구현체를 쉽게 추가할 수 있습니다.
+
 ## 결론
 
 - **Order**: 독립적인 설계는 코드의 유지보수성과 확장성을 높이며, 테스트를 용이하게 합니다. 이는 특히 대규모 시스템에서 중요한 설계 원칙입니다.
 - **Order2**: 독립적이지 않은 설계는 코드의 복잡성을 증가시키고, 유지보수성과 확장성을 저해할 수 있습니다.
+- **Order3**: SRP와 OCP를 적용하여, 코드의 유지보수성과 확장성을 극대화하였습니다. 이는 가장 권장되는 설계 방식입니다.
 
-이 문서를 통해 두 설계의 차이점을 이해하고, 독립적인 비즈니스 규칙의 중요성을 인식할 수 있습니다.
-=======
----
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-
->>>>>>> 7908b4d9f50a0676e451b67f985f6c66b67f2a97
+이 문서를 통해 세 설계의 차이점을 이해하고, 독립적인 비즈니스 규칙의 중요성을 인식할 수 있습니다.
