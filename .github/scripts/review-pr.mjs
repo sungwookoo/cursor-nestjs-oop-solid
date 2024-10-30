@@ -48,6 +48,13 @@ async function reviewPR() {
     for (const file of files) {
       const fileName = file.filename;
       const patch = file.patch;
+      const status = file.status;
+
+      // 삭제된 파일은 건너뛰기
+      if (status === 'removed') {
+        console.log(`Skipping review for removed file: ${fileName}`);
+        continue;
+      }
 
       if (patch) {
         // 파일 변경 내용에 대한 리뷰 생성 (한글로)
