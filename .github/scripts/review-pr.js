@@ -24,8 +24,8 @@ async function reviewPR() {
   const reviewComment = response.data.choices[0].text.trim();
 
   await octokit.issues.createComment({
-    owner: 'your-github-username',
-    repo: 'your-repo-name',
+    owner: 'sungwookoo',
+    repo: 'cursor-nestjs-oop-solid',
     issue_number: process.env.PR_NUMBER,
     body: reviewComment,
   });
