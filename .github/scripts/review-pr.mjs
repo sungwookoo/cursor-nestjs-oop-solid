@@ -43,6 +43,8 @@ async function reviewPR() {
       pull_number: process.env.PR_NUMBER,
     });
 
+    let fileSummary = '';
+
     for (const file of files) {
       const fileName = file.filename;
       const patch = file.patch;
@@ -56,6 +58,8 @@ async function reviewPR() {
 
         const fileComment = fileReview.choices[0].message.content.trim();
         console.log(`Review for ${fileName}:`, fileComment);
+        
+        fileSummary += `## ${fileName}\n\n patch: ${patch}\n\n`;
 
         // PR에 파일 변경 리뷰 코멘트 추가
         await octokit.issues.createComment({
@@ -65,6 +69,20 @@ async function reviewPR() {
           body: `파일 ${fileName}에 대한 리뷰:\n\n${fileComment}`,
         });
       }
+    }
+
+    if(fileSummary) {
+      const fileSummaryReview = await client.chat.completions.create({
+        messages: [{ role: 'user', content: `다음 파일 변경 사항 요약을 검토하고 피드백을 제공하세요:\n\n${fileSummary}` }],
+        model: 'gpt-3.5-turbo',
+      });
+
+      await octokit.issues.createComment({
+        owner: 'sungwookoo',
+        repo: 'cursor-nestjs-oop-solid',
+        issue_number: process.env.PR_NUMBER,
+        body: `파일 변경 사항 요약 리뷰:\n\n${fileSummaryReview.choices[0].message.content.trim()}`,
+      });
     }
 
     console.log('Comments posted successfully');
