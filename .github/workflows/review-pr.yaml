@@ -10,17 +10,22 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
-        node-version: '14'
+        node-version: '20'
 
-    - name: Install dependencies
-      run: npm install
+    - name: Install openai
+      run: npm install openai
+
+    - name: Install @octokit/rest
+      run: npm install @octokit/rest
 
     - name: Run PR review script
       env:
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      run: node .github/scripts/review-pr.js
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+      run: node .github/scripts/review-pr.mjs
