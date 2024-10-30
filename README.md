@@ -56,7 +56,8 @@ OOP(객체 지향 프로그래밍) 원칙을 준수하여 코드의 재사용성
   - `UserRepository` 인터페이스를 구현하는 여러 저장소 클래스(`InMemoryUserRepository`, `AdvancedUserRepository`)는 동일한 메서드(`findAll`, `findOne`)를 제공하므로, 클라이언트는 구체적인 구현체에 의존하지 않고 인터페이스를 통해 작업할 수 있습니다.
 
 ---
-
+# Users: OOP, SOLID
+`users` 디렉토리에 있는 코드는 OOP와 SOLID 원칙을 적용한 예시입니다.
 ## SOLID
 
 SOLID 원칙을 준수하여 유지보수성과 확장성을 확보
@@ -101,7 +102,7 @@ SOLID 원칙을 준수하여 유지보수성과 확장성을 확보
 
 # Order vs Order2 vs Order3: 설계 비교
 
-이 문서는 `order`, `order2`, `order3` 디렉토리의 설계 차이점을 설명합니다. 각 디렉토리는 각각 독립적인 비즈니스 규칙을 적용한 설계와 그렇지 않은 설계를 보여줍니다.
+이 문서는 `order`, `order2`, `order3` 디렉토리의 설계 차이점을 설명합니다.
 
 ## Order (독립적인 설계)
 
