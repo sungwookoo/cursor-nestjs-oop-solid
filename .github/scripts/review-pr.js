@@ -1,5 +1,5 @@
-import { Octokit } from '@octokit/rest';
-import { Configuration, OpenAIApi } from 'openai';
+const { Octokit } = require("@octokit/rest");
+const { Configuration, OpenAIApi } = require("openai");
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 const openai = new OpenAIApi(
